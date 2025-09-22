@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import getURLs from "../../services/urls";
 import { makeRequest } from "../../utils/requests_utils";
 import { GET } from "../../utils/constants";
-import { Button, Table } from "react-bootstrap";
+import { Button, Table, Card } from "react-bootstrap";
 
 const ParcelStatus = ({parcelId}) => {
     const [todo, setToDo] = useState({});
@@ -30,17 +30,16 @@ const ParcelStatus = ({parcelId}) => {
         <div>
             {todo && isLoaded?
                 <>
-                    <Table striped responsive>
-                        <thead>
-                            <th>Parcel Id</th>
-                            <th>Delivery Status</th>
-                        </thead>
-                        <tbody>
-                            <td>{todo.id}</td>
-                            <td>{todo.completed? 'Delivered' : "Not delivered"}</td>
-                        </tbody>
-                    </Table>
-
+                    <Card className="mb-3">
+                        <Card.Body className="text-start">
+                            <Card.Title className="text-capitalize">{todo.title}</Card.Title>
+                            <Card.Text>
+                                <p><span className="h6">Parcel Id:</span> {todo.id}</p>
+                                <p><span className="h6">Delivery Status:</span> {todo.completed? 'Delivered' : "Not delivered"}</p>
+                            </Card.Text>
+                          
+                        </Card.Body>
+                    </Card>
                     <Button onClick={(e)=> getTodo()}>Refresh</Button>
                 </>
                 :
